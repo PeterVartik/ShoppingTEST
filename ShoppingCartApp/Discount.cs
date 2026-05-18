@@ -1,39 +1,32 @@
 namespace ShoppingCartApp
 {
+    using System;
+
     public class Discount
     {
-        public double ApplyPercentage(double total, double percent)
+        public double ApplyPercentage(double totalAmount, double percentage)
         {
-            if (percent < 0 || percent > 100)
-            {
-                throw new ArgumentException("Percent must be between 0 and 100.");
-            }
+            if (percentage < 0 || percentage > 100)
+                throw new ArgumentException("Percentage should be within 0 and 100.");
 
-            return total * ((100 - percent) / 100);
+            double discountFactor = (100.0 - percentage) / 100.0;
+            return totalAmount * discountFactor;
         }
 
-        public double ApplyFixed(double total, double discountAmount)
+        public double ApplyFixed(double totalAmount, double discountValue)
         {
-            if (discountAmount < 0)
-            {
-                throw new ArgumentException("Discount amount cannot be negative.");
-            }
-            if (discountAmount > total)
-            {
+            if (discountValue < 0)
+                throw new ArgumentException("Discount cannot be a negative value.");
+
+            if (totalAmount < discountValue)
                 return 0;
-            }
-            else
-            {
-                return total - discountAmount;
-            }
+                
+            return totalAmount - discountValue;
         }
 
-        public bool IsValid(double discountValue)
+        public bool IsValid(double val)
         {
-            if (discountValue > 0)
-                return true;
-            else
-                return false;
+            return val > 0;
         }
     }
 }

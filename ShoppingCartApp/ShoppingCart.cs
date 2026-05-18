@@ -1,61 +1,49 @@
 namespace ShoppingCartApp
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class ShoppingCart
     {
-        private readonly List<CartItem> _items;
+        private readonly List<CartItem> _cartItems;
 
         public ShoppingCart()
         {
-            _items = new List<CartItem>();
+            _cartItems = new List<CartItem>();
         }
 
-        public void AddItem(string name, double unitPrice, int quantity)
+        public void AddItem(string itemName, double price, int count)
         {
-            var existingItem = _items.FirstOrDefault(a =>
-                string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase));
+            var foundItem = _cartItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
 
-            if (existingItem != null)
+            if (foundItem == null)
             {
-                existingItem.IncreaseQuantity(quantity);
+                _cartItems.Add(new CartItem(itemName, price, count));
             }
             else
             {
-                _items.Add(new CartItem(name, unitPrice, quantity));
+                foundItem.IncreaseQuantity(count);
             }
         }
 
-        public bool RemoveItem(string name)
+        public bool RemoveItem(string itemName)
         {
-            var item = _items.FirstOrDefault(a =>
-            string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase));
-
-            if (item != null)
-            {
-                _items.Remove(item);
-                return true;
-            }
-
-            return false;
+            var target = _cartItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+            
+            if (target == null) 
+                return false;
+                
+            _cartItems.Remove(target);
+            return true;
         }
 
-        public int GetItemCount()
-        {
-            return _items.Sum(x => x.Quantity);
-        }
+        public int GetItemCount() => _cartItems.Sum(item => item.Quantity);
 
-        public decimal GetTotal()
-        {
-            return (decimal)_items.Sum(x => x.GetLineTotal());
-        }
+        public decimal GetTotal() => (decimal)_cartItems.Sum(item => item.GetLineTotal());
 
-        public IReadOnlyList<CartItem> GetItems()
-        {
-            return _items.AsReadOnly();
-        }
+        public IReadOnlyList<CartItem> GetItems() => _cartItems.AsReadOnly();
 
-        public void Clear()
-        {
-            _items.Clear();
-        }
+        public void Clear() => _cartItems.Clear();
     }
 }
