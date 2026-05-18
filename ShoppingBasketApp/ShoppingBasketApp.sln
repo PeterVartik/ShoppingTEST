@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartApp", "ShoppingCartApp.csproj", "{11C06449-B651-4329-B8BC-9C13071142A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingBasketApp", "ShoppingBasketApp.csproj", "{11C06449-B651-4329-B8BC-9C13071142A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartAppTests", "..\ShoppingCartAppTests\ShoppingCartAppTests.csproj", "{620E5E40-E385-48A1-8C23-0A44EAA65930}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingBasketAppTests", "..\ShoppingBasketAppTests\ShoppingBasketAppTests.csproj", "{620E5E40-E385-48A1-8C23-0A44EAA65930}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

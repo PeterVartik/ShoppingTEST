@@ -1,16 +1,16 @@
-using ShoppingCartApp;
+using ShoppingBasketApp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ShoppingCartAppTests
+namespace ShoppingBasketAppTests
 {
     [TestClass]
-    public class CartItemTests
+    public class BasketItemTests
     {
         [TestMethod]
         public void Constructor_ValidArguments()
         {
-            var cartItem = new CartItem("Apple", 1.50, 3);
+            var cartItem = new BasketItem("Apple", 1.50, 3);
             Assert.AreEqual("Apple", cartItem.Name);
             Assert.AreEqual(1.50, cartItem.UnitPrice);
             Assert.AreEqual(3, cartItem.Quantity);
@@ -19,32 +19,32 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void Constructor_InvalidName()
         {
-            Assert.ThrowsException<ArgumentException>(() => new CartItem("", 1.50, 3));
+            Assert.ThrowsException<ArgumentException>(() => new BasketItem("", 1.50, 3));
         }
 
         [TestMethod]
         public void Constructor_InvalidUnitPrice()
         {
-            Assert.ThrowsException<ArgumentException>(() => new CartItem("InvalidUnitPrice", -1, 3));
+            Assert.ThrowsException<ArgumentException>(() => new BasketItem("InvalidUnitPrice", -1, 3));
         }
 
         [TestMethod]
         public void Constructor_InvalidQuantity()
         {
-            Assert.ThrowsException<ArgumentException>(() => new CartItem("InvalidQuantity", 1.50, 0));
+            Assert.ThrowsException<ArgumentException>(() => new BasketItem("InvalidQuantity", 1.50, 0));
         }
 
         [TestMethod]
         public void GetTotal_MultipleQuantity()
         {
-            var cartItem = new CartItem("Banana", 0.75, 4);
+            var cartItem = new BasketItem("Banana", 0.75, 4);
             Assert.AreEqual(3.00, cartItem.GetLineTotal());
         }
 
         [TestMethod]
         public void UpdateQuantity_ValidValue()
         {
-            var cartItem = new CartItem("Milk", 1.20, 1);
+            var cartItem = new BasketItem("Milk", 1.20, 1);
             cartItem.UpdateQuantity(5);
             Assert.AreEqual(5, cartItem.Quantity);
         }
@@ -52,18 +52,18 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void UpdateQuantity_InvalidValue()
         {
-            var cartItem = new CartItem("Milk", 1.20, 1);
+            var cartItem = new BasketItem("Milk", 1.20, 1);
             Assert.ThrowsException<ArgumentException>(() => cartItem.UpdateQuantity(0));
             Assert.ThrowsException<ArgumentException>(() => cartItem.UpdateQuantity(-5));
         }
     }
 
     [TestClass]
-    public class ShoppingCartTests
+    public class ShoppingBasketTests
     {
-        private ShoppingCart CreatePopulatedCart()
+        private ShoppingBasket CreatePopulatedCart()
         {
-            var myCart = new ShoppingCart();
+            var myCart = new ShoppingBasket();
             myCart.AddItem("Apple", 1.00, 3);
             myCart.AddItem("Bread", 2.50, 1);
             return myCart;
@@ -72,7 +72,7 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void AddItem_NewItem()
         {
-            var myCart = new ShoppingCart();
+            var myCart = new ShoppingBasket();
             myCart.AddItem("Apple", 1.00, 2);
             Assert.AreEqual(2, myCart.GetItemCount());
         }
@@ -88,7 +88,7 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void AddItem_InvalidArguments()
         {
-            Assert.ThrowsException<ArgumentException>(() => new ShoppingCart().AddItem("", 1.00, 2));
+            Assert.ThrowsException<ArgumentException>(() => new ShoppingBasket().AddItem("", 1.00, 2));
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void GetTotal_MultipleItems()
         {
-            var myCart = new ShoppingCart();
+            var myCart = new ShoppingBasket();
             myCart.AddItem("Apple", 1.00, 3);
             myCart.AddItem("Bread", 2.50, 2);
             Assert.AreEqual(8.00m, myCart.GetTotal());
@@ -130,7 +130,7 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void GetTotal_EmptyCart()
         {
-            var myCart = new ShoppingCart();
+            var myCart = new ShoppingBasket();
             Assert.AreEqual(0m, myCart.GetTotal());
         }
 
@@ -154,7 +154,7 @@ namespace ShoppingCartAppTests
         [TestMethod]
         public void Clear_EmptyCart()
         {
-            var myCart = new ShoppingCart();
+            var myCart = new ShoppingBasket();
             myCart.Clear();
             Assert.AreEqual(0, myCart.GetItemCount());
             Assert.AreEqual(0m, myCart.GetTotal());
@@ -162,90 +162,90 @@ namespace ShoppingCartAppTests
     }
 
     [TestClass]
-    public class DiscountTests
+    public class PriceReductionTests
     {
         [TestMethod]
         public void ApplyPercentage_TenPercent()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(180, testDiscount.ApplyPercentage(200, 10));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(180, testPriceReduction.ApplyPercentage(200, 10));
         }
 
         [TestMethod]
         public void ApplyPercentage_ZeroPercent()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(200, testDiscount.ApplyPercentage(200, 0));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(200, testPriceReduction.ApplyPercentage(200, 0));
         }
 
         [TestMethod]
         public void ApplyPercentage_HundredPercent()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(0, testDiscount.ApplyPercentage(200, 100));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(0, testPriceReduction.ApplyPercentage(200, 100));
         }
 
         [TestMethod]
         public void ApplyPercentage_FiftyPercent()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(100, testDiscount.ApplyPercentage(200, 50));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(100, testPriceReduction.ApplyPercentage(200, 50));
         }
 
         [TestMethod]
         public void ApplyPercentage_OverHundredPercent()
         {
-            var testDiscount = new Discount();
-            Assert.ThrowsException<ArgumentException>(() => testDiscount.ApplyPercentage(200, 105));
+            var testPriceReduction = new PriceReduction();
+            Assert.ThrowsException<ArgumentException>(() => testPriceReduction.ApplyPercentage(200, 105));
         }
 
         [TestMethod]
         public void ApplyFixed_AmountLessThanTotal()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(75, testDiscount.ApplyFixed(100, 25));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(75, testPriceReduction.ApplyFixed(100, 25));
         }
 
         [TestMethod]
         public void ApplyFixed_AmountEqualToTotal()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(0, testDiscount.ApplyFixed(100, 100));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(0, testPriceReduction.ApplyFixed(100, 100));
         }
 
         [TestMethod]
         public void ApplyFixed_AmountGreaterThanTotal()
         {
-            var testDiscount = new Discount();
-            Assert.AreEqual(0, testDiscount.ApplyFixed(100, 150));
+            var testPriceReduction = new PriceReduction();
+            Assert.AreEqual(0, testPriceReduction.ApplyFixed(100, 150));
         }
 
         [TestMethod]
         public void ApplyFixed_NegativeAmount()
         {
-            var testDiscount = new Discount();
-            Assert.ThrowsException<ArgumentException>(() => testDiscount.ApplyFixed(100, -10));
+            var testPriceReduction = new PriceReduction();
+            Assert.ThrowsException<ArgumentException>(() => testPriceReduction.ApplyFixed(100, -10));
         }
 
         [TestMethod]
         public void IsValid_PositiveValue()
         {
-            var testDiscount = new Discount();
-            Assert.IsTrue(testDiscount.IsValid(15));
+            var testPriceReduction = new PriceReduction();
+            Assert.IsTrue(testPriceReduction.IsValid(15));
         }
 
         [TestMethod]
         public void IsValid_ZeroValue()
         {
-            var testDiscount = new Discount();
-            Assert.IsFalse(testDiscount.IsValid(0));
+            var testPriceReduction = new PriceReduction();
+            Assert.IsFalse(testPriceReduction.IsValid(0));
         }
 
         [TestMethod]
         public void IsValid_NegativeValue()
         {
-            var testDiscount = new Discount();
-            Assert.IsFalse(testDiscount.IsValid(-5));
+            var testPriceReduction = new PriceReduction();
+            Assert.IsFalse(testPriceReduction.IsValid(-5));
         }
     }
 }

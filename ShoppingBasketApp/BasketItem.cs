@@ -1,14 +1,14 @@
-namespace ShoppingCartApp
+namespace ShoppingBasketApp
 {
     using System;
 
-    public class CartItem
+    public class BasketItem
     {
         public string Name { get; }
         public double UnitPrice { get; }
         public int Quantity { get; private set; }
 
-        public CartItem(string productName, double pricePerUnit, int itemQuantity)
+        public BasketItem(string productName, double pricePerUnit, int itemQuantity)
         {
             if (string.IsNullOrWhiteSpace(productName))
                 throw new ArgumentException("Product name cannot be empty.");

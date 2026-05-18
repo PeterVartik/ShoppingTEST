@@ -1,16 +1,16 @@
-namespace ShoppingCartApp
+namespace ShoppingBasketApp
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ShoppingCart
+    public class ShoppingBasket
     {
-        private readonly List<CartItem> _cartItems;
+        private readonly List<BasketItem> _cartItems;
 
-        public ShoppingCart()
+        public ShoppingBasket()
         {
-            _cartItems = new List<CartItem>();
+            _cartItems = new List<BasketItem>();
         }
 
         public void AddItem(string itemName, double price, int count)
@@ -19,7 +19,7 @@ namespace ShoppingCartApp
 
             if (foundItem == null)
             {
-                _cartItems.Add(new CartItem(itemName, price, count));
+                _cartItems.Add(new BasketItem(itemName, price, count));
             }
             else
             {
@@ -42,7 +42,7 @@ namespace ShoppingCartApp
 
         public decimal GetTotal() => (decimal)_cartItems.Sum(item => item.GetLineTotal());
 
-        public IReadOnlyList<CartItem> GetItems() => _cartItems.AsReadOnly();
+        public IReadOnlyList<BasketItem> GetItems() => _cartItems.AsReadOnly();
 
         public void Clear() => _cartItems.Clear();
     }

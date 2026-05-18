@@ -19,12 +19,12 @@ A feladatod: teszteket írni, implementálni a logikát, és a munkát Git-ben k
 ## Projektstruktúra
 
 ```
-├── ShoppingCartApp/                 ← Console projekt (ezt implementálod)
-│   ├── CartItem.cs
-│   ├── ShoppingCart.cs
-│   ├── Discount.cs
+├── ShoppingBasketApp/                 ← Console projekt (ezt implementálod)
+│   ├── BasketItem.cs
+│   ├── ShoppingBasket.cs
+│   ├── PriceReduction.cs
 │   └── Program.cs
-├─ ShoppingCartAppTests/           ← MSTest projekt (ezt bővíted)
+├─ ShoppingBasketAppTests/           ← MSTest projekt (ezt bővíted)
     └── Tests.cs
 ```
 
@@ -61,15 +61,15 @@ git commit -m "Edge case tesztek hozzáadva implementáció előtt"
 
 Javasolt sorrend:
 
-1. `CartItem` konstruktor, `GetLineTotal`, `UpdateQuantity`
-2. `ShoppingCart.AddItem`, `GetItemCount`, `GetTotal`
-3. `ShoppingCart.RemoveItem`, `Clear`, `GetItems`
-4. `Discount` összes metódusa
+1. `BasketItem` konstruktor, `GetLineTotal`, `UpdateQuantity`
+2. `ShoppingBasket.AddItem`, `GetItemCount`, `GetTotal`
+3. `ShoppingBasket.RemoveItem`, `Clear`, `GetItems`
+4. `PriceReduction` összes metódusa
 
 **Minden metódus (vagy kis csoport) után commitolj:**
 
 ```
-git commit -m "CartItem implementálva"
+git commit -m "BasketItem implementálva"
 ```
 
 (vagy a visual studio-ban a grafikus felületen)

@@ -1,4 +1,4 @@
-﻿namespace ShoppingCartApp
+﻿namespace ShoppingBasketApp
 {
     internal class Program
     {
