@@ -1,0 +1,99 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{620E5E40-E385-48A1-8C23-0A44EAA65930}|..\\ShoppingCartAppTests\\ShoppingCartAppTests.csproj|c:\\users\\bende\\source\\repos\\shoppingcartapp_db\\shoppingcartapptests\\tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11C06449-B651-4329-B8BC-9C13071142A3}|ShoppingCartApp.csproj|c:\\users\\bende\\source\\repos\\shoppingcartapp_db\\shoppingcartapp\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11C06449-B651-4329-B8BC-9C13071142A3}|ShoppingCartApp.csproj|solutionrelative:shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11C06449-B651-4329-B8BC-9C13071142A3}|ShoppingCartApp.csproj|c:\\users\\bende\\source\\repos\\shoppingcartapp_db\\shoppingcartapp\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11C06449-B651-4329-B8BC-9C13071142A3}|ShoppingCartApp.csproj|solutionrelative:cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11C06449-B651-4329-B8BC-9C13071142A3}|ShoppingCartApp.csproj|c:\\users\\bende\\source\\repos\\shoppingcartapp_db\\shoppingcartapp\\discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11C06449-B651-4329-B8BC-9C13071142A3}|ShoppingCartApp.csproj|solutionrelative:discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Discount.cs",
+              "DocumentMoniker": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\Discount.cs",
+              "RelativeDocumentMoniker": "Discount.cs",
+              "ToolTip": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\Discount.cs",
+              "RelativeToolTip": "Discount.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T09:50:19.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Tests.cs",
+              "DocumentMoniker": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartAppTests\\Tests.cs",
+              "RelativeDocumentMoniker": "..\\ShoppingCartAppTests\\Tests.cs",
+              "ToolTip": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartAppTests\\Tests.cs",
+              "RelativeToolTip": "..\\ShoppingCartAppTests\\Tests.cs",
+              "ViewState": "AgIAAJoAAAAAAAAAAAAIwHIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T09:39:06.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ShoppingCart.cs",
+              "DocumentMoniker": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\ShoppingCart.cs",
+              "RelativeDocumentMoniker": "ShoppingCart.cs",
+              "ToolTip": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\ShoppingCart.cs",
+              "RelativeToolTip": "ShoppingCart.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwD4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T09:38:53.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CartItem.cs",
+              "DocumentMoniker": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\CartItem.cs",
+              "RelativeDocumentMoniker": "CartItem.cs",
+              "ToolTip": "C:\\Users\\Bende\\source\\repos\\ShoppingCartApp_DB\\ShoppingCartApp\\CartItem.cs",
+              "RelativeToolTip": "CartItem.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAIwCMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T09:01:49.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

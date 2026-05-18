@@ -1,4 +1,4 @@
-﻿using ShoppingCartApp;
+using ShoppingCartApp;
 
 namespace ShoppingCartAppTests
 {
@@ -13,9 +13,25 @@ namespace ShoppingCartAppTests
             Assert.AreEqual(1.50, item.UnitPrice);
             Assert.AreEqual(3, item.Quantity);
         }
-        // TODO: null/üres name -> ArgumentException
-        // TODO: unitPrice <= 0 -> ArgumentException
-        // TODO: quantity <= 0 -> ArgumentException
+        [TestMethod]
+        public void Constructor_InvalidName()
+        {
+            // TODO: null/üres name -> ArgumentException
+            Assert.ThrowsException<ArgumentException>(() => new CartItem("", 1.50, 3));
+        }
+        [TestMethod]
+        public void Constructor_InvalidUnitPrice()
+        {
+            // TODO: unitPrice <= 0 -> ArgumentException
+            Assert.ThrowsException<ArgumentException>(() => new CartItem("InvalidUnitPrice", -1, 3));
+        }
+        [TestMethod]
+        public void Constructor_InvalidQuantity()
+        {
+            // TODO: quantity <= 0 -> ArgumentException
+            Assert.ThrowsException<ArgumentException>(() => new CartItem("InvalidQuantity", 1.50, 0));
+        }
+
 
         [TestMethod]
         public void GetTotal_MultipleQuantity()
@@ -31,92 +47,219 @@ namespace ShoppingCartAppTests
             item.UpdateQuantity(5);
             Assert.AreEqual(5, item.Quantity);
         }
-        // TODO: quantity <= 0 -> ArgumentException
-    }
-
-    [TestClass]
-    public class ShoppingCartTests
-    {
-        private ShoppingCart CreateCartWithItems()
-        {
-            var cart = new ShoppingCart();
-            cart.AddItem("Apple", 1.00, 3);
-            cart.AddItem("Bread", 2.50, 1);
-            return cart;
-        }
-
         [TestMethod]
-        public void AddItem_NewItem()
+        public void UpdateQuantity_InvalidValue()
         {
-            var cart = new ShoppingCart();
-            cart.AddItem("Apple", 1.00, 2);
-            Assert.AreEqual(1, cart.GetItemCount());
-        }
-        // TODO: ugyanolyan nevű item hozzáadása, mennyiséget növel annál az adott item-nél (nincs új item)
-        // TODO: érvénytelen argumentumok -> ArgumentException
+            var item = new CartItem("Milk", 1.20, 1);
+            Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(0));
+            // TODO: quantity <= 0 -> ArgumentException
+            Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(-5));
 
-        [TestMethod]
-        public void RemoveItem_ExistingItem()
-        {
-            var cart = CreateCartWithItems();
-            bool result = cart.RemoveItem("Apple");
-            Assert.IsTrue(result);
-            Assert.AreEqual(1, cart.GetItemCount());
         }
-        // TODO: nem létező item -> false
-        // TODO: törlés kis-nagybetű független-e ("apple" törli az "Apple"-t)
 
-        [TestMethod]
-        public void GetTotal_MultipleItems()
+        [TestClass]
+        public class ShoppingCartTests
         {
-            var cart = new ShoppingCart();
-            cart.AddItem("Apple", 1.00, 3);  // 3.00
-            cart.AddItem("Bread", 2.50, 2);  // 5.00
-            Assert.AreEqual(8.00m, cart.GetTotal());
-        }
-        // TODO: üres kosár -> 0
-        // TODO: item törlése után helyes-e az összeg
+            private ShoppingCart CreateCartWithItems()
+            {
+                var cart = new ShoppingCart();
+                cart.AddItem("Apple", 1.00, 3);
+                cart.AddItem("Bread", 2.50, 1);
+                return cart;
+            }
 
-        [TestMethod]
-        public void Clear_CartWithItems()
-        {
-            var cart = CreateCartWithItems();
-            cart.Clear();
-            Assert.AreEqual(0, cart.GetItemCount());
-            Assert.AreEqual(0m, cart.GetTotal());
-        }
-        // TODO: üres kosáron Clear() nem dob kivételt
-    }
+            [TestMethod]
+            public void AddItem_NewItem()
+            {
+                var cart = new ShoppingCart();
+                cart.AddItem("Apple", 1.00, 2);
+                Assert.AreEqual(2, cart.GetItemCount());
+            }
+            [TestMethod]
+            public void AddItem_ExistingItem()
+            {
+                // TODO: ugyanolyan nevű item hozzáadása, mennyiséget növel annál az adott item-nél (nincs új item)
+                var cart = CreateCartWithItems();
+                cart.AddItem("Apple", 1.00, 2);
+                Assert.AreEqual(6, cart.GetItemCount());
+            }
+            [TestMethod]
+            public void AddItem_InvalidArguments()
+            {
+                // TODO: érvénytelen argumentumok -> ArgumentException
+                Assert.ThrowsException<ArgumentException>(() => new ShoppingCart().AddItem("", 1.00, 2));
+            }
 
-    [TestClass]
-    public class DiscountTests
-    {
-        [TestMethod]
-        public void ApplyPercentage_TenPercent()
-        {
-            var discount = new Discount();
-            Assert.AreEqual(180, discount.ApplyPercentage(200, 10));
-        }
-        // TODO: 0% -> változatlan összeg
-        // TODO: 100% -> 0
-        // TODO: percent > 100 -> ArgumentException
 
-        [TestMethod]
-        public void ApplyFixed_AmountLessThanTotal()
-        {
-            var discount = new Discount();
-            Assert.AreEqual(75, discount.ApplyFixed(100, 25));
-        }
-        // TODO: kedvezmény > total -> 0 (nem negatív)
-        // TODO: negatív discountAmount -> ArgumentException
+            [TestMethod]
+            public void RemoveItem_ExistingItem()
+            {
+                var cart = CreateCartWithItems();
+                bool result = cart.RemoveItem("Apple");
+                Assert.IsTrue(result);
+                Assert.AreEqual(1, cart.GetItemCount());
+            }
+            [TestMethod]
+            public void removeItem_NonExistingItem()
+            {
+                var cart = CreateCartWithItems();
+                bool result = cart.RemoveItem("NonExisting");
+                Assert.IsFalse(result);
+                Assert.AreEqual(4, cart.GetItemCount());
+                // TODO: nem létező item -> false
+            }
+            [TestMethod]
+            public void RemoveItem_CaseSensitivity()
+            {
+                var cart = CreateCartWithItems();
+                bool result = cart.RemoveItem("apple");
+                Assert.IsTrue(result);
+                Assert.AreEqual(1, cart.GetItemCount());
+                // TODO: törlés kis-nagybetű független-e ("apple" törli az "Apple"-t)
+            }
 
-        [TestMethod]
-        public void IsValid_PositiveValue()
-        {
-            var discount = new Discount();
-            Assert.IsTrue(discount.IsValid(15));
+
+            [TestMethod]
+            public void GetTotal_MultipleItems()
+            {
+                var cart = new ShoppingCart();
+                cart.AddItem("Apple", 1.00, 3);  // 3.00
+                cart.AddItem("Bread", 2.50, 2);  // 5.00
+                Assert.AreEqual(8.00m, cart.GetTotal());
+            }
+            [TestMethod]
+            public void GetTotal_EmptyCart()
+            {
+                var cart = new ShoppingCart();
+                Assert.AreEqual(0m, cart.GetTotal());
+                // TODO: üres kosár -> 0
+            }
+            [TestMethod]
+            public void GetTotal_AfterRemovingItem()
+            {
+                var cart = CreateCartWithItems();
+                cart.RemoveItem("Apple");
+                Assert.AreEqual(2.50m, cart.GetTotal());
+                // TODO: item törlése után helyes-e az összeg
+            }
+
+
+
+            [TestMethod]
+            public void Clear_CartWithItems()
+            {
+                var cart = CreateCartWithItems();
+                cart.Clear();
+                Assert.AreEqual(0, cart.GetItemCount());
+                Assert.AreEqual(0m, cart.GetTotal());
+            }
+
+            [TestMethod]
+            public void Clear_EmptyCart()
+            {
+                var cart = new ShoppingCart();
+                cart.Clear();
+                Assert.AreEqual(0, cart.GetItemCount());
+                Assert.AreEqual(0m, cart.GetTotal());
+                // TODO: üres kosáron Clear() nem dob kivételt
+            }
+
         }
-        // TODO: 0 -> false
-        // TODO: negatív -> false
+
+        [TestClass]
+        public class DiscountTests
+        {
+            [TestMethod]
+            public void ApplyPercentage_TenPercent()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(180, discount.ApplyPercentage(200, 10));
+            }
+            [TestMethod]
+            public void ApplyPercentage_ZeroPercent()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(200, discount.ApplyPercentage(200, 0));
+                // TODO: 0% -> változatlan összeg
+            }
+
+            [TestMethod]
+            public void ApplyPercentage_HundredPercent()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(0, discount.ApplyPercentage(200, 100));
+                // TODO: 100% -> 0
+            }
+
+            [TestMethod]
+            public void ApplyPercentage_FiftyPercent()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(100, discount.ApplyPercentage(200, 50));
+            }
+
+            [TestMethod]
+            public void ApplyPercentage_OverHundredPercent()
+            {
+                // TODO: percent > 100 -> ArgumentException
+                var discount = new Discount();
+                Assert.ThrowsException<ArgumentException>(() => discount.ApplyPercentage(200, 105));
+            }
+
+
+            [TestMethod]
+            public void ApplyFixed_AmountLessThanTotal()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(75, discount.ApplyFixed(100, 25));
+            }
+            [TestMethod]
+            public void ApplyFixed_AmountEqualToTotal()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(0, discount.ApplyFixed(100, 100));
+                // TODO: kedvezmény > total -> 0 (nem negatív)
+            }
+
+            [TestMethod]
+            public void ApplyFixed_AmountGreaterThanTotal()
+            {
+                var discount = new Discount();
+                Assert.AreEqual(0, discount.ApplyFixed(100, 150));
+            }
+
+            [TestMethod]
+            public void ApplyFixed_NegativeAmount()
+            {
+                // TODO: negatív discountAmount -> ArgumentException
+                var discount = new Discount();
+                Assert.ThrowsException<ArgumentException>(() => discount.ApplyFixed(100, -10));
+            }
+
+
+            [TestMethod]
+            public void IsValid_PositiveValue()
+            {
+                var discount = new Discount();
+                Assert.IsTrue(discount.IsValid(15));
+            }
+            [TestMethod]
+            public void IsValid_ZeroValue()
+            {
+                // TODO: 0 -> false
+                var discount = new Discount();
+                Assert.IsFalse(discount.IsValid(0));
+            }
+
+            [TestMethod]
+
+            public void IsValid_NegativeValue()
+            {
+                // TODO: negatív -> false
+                var discount = new Discount();
+                Assert.IsFalse(discount.IsValid(-5));
+
+            }
+        }
     }
 }
