@@ -9,7 +9,6 @@ namespace ShoppingCartApp
             _items = new List<CartItem>();
         }
 
-        // Ha az item neve már szerepel (kis-nagybetű független), növeli a mennyiségét
         public void AddItem(string name, double unitPrice, int quantity)
         {
             var existingItem = _items.FirstOrDefault(a =>
@@ -25,7 +24,6 @@ namespace ShoppingCartApp
             }
         }
 
-        // true ha megtalálta és törölte, false ha nem szerepelt
         public bool RemoveItem(string name)
         {
             var item = _items.FirstOrDefault(a =>
@@ -45,7 +43,6 @@ namespace ShoppingCartApp
             return _items.Sum(x => x.Quantity);
         }
 
-        // Összeg = minden item (UnitPrice * Quantity) összege
         public decimal GetTotal()
         {
             return (decimal)_items.Sum(x => x.GetLineTotal());
