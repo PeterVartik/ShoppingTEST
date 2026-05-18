@@ -18,6 +18,10 @@ namespace ShoppingCartApp
         // Példa: ApplyFixed(100, 50) -> 50
         public double ApplyFixed(double total, double discountAmount)
         {
+            if (discountAmount < 0)
+            {
+                throw new ArgumentException("Discount amount cannot be negative.");
+            }
             if (discountAmount > total)
             {
                 return 0;
